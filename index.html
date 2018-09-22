@@ -2,51 +2,79 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>湖南城市学院</title>
+        <title>Ryen Toretto's Home Page</title>
         
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="./css/index.css" />
     </head>
 
     <body>
-        <div id="hncu_header">
-            <div id="hncu_search" class="clearfix">
-                <input type="text" name="searh_content" id="search_input" value="请输入搜索关键字" />
+    	<div id="kjf_nav" class="clearfix">
+	        <ul class="clearfix">
+	            <li>
+	                <a href="http://www.cnblogs.com/tianxiaxuange/" target="_blank">
+	                	我的博客
+	                	<p>My Blog</p>
+	                </a>
+	            </li>
+	            
+	            <li>
+	                <a href="#">
+	                	我的简历
+	                	<p>My Resume</p>
+	                </a>
+	            </li>
+	            
+	            <li>
+	                <a href="#">
+	                	我的项目
+	                	<p>My Project</p>
+	                </a>
+	            </li>
+	            
+	            <li>
+	                <a href="#">
+	                	我的相册
+	                	<p>My Album</p>
+	                </a>
+	            </li>
+	            
+	            <li>
+	                <a href="#">
+	                	联系我	
+	                	<p>Contact Me</p>
+	                </a>
+	            </li>
+	            
+	            <li>
+	                <a href="#">
+	                	关于我
+	                	<p>About Me</p>
+	                </a>
+	            </li>
+	        </ul>
+	        <img src="./img/cool.png">
+	        <div id="kjf_copyright">Copyright &copy; 2018 kjf</div>
+        </div>
+        
+        <div id="kjf_right">
+            <!--<div id="kjf_search" class="clearfix">
+                <input type="text" name="searh_content" id="search_input" placeholder="请输入搜索关键字" />
                 <a href="#" id="search_btn"></a>
-            </div>
+            </div>-->
         </div>
         
-        <ul id="hncu_nav">
-            <li>
-                <a href="#">首页</a>
-            </li>
-            
-            <li>
-                <a href="#">新闻</a>
-            </li>
-            
-            <li>
-                <a href="#">联系</a>
-            </li>
-            
-            <li>
-                <a href="#">关于</a>
-            </li>
-        </ul>
-        
-        <div id="hncu_content">
-            <div id="hncu_left"></div>
-            <div id="hncu_center"></div>
-            <div id="hncu_right"></div>
+        <div id="kjf_left" class="clearfix">
         </div>
         
-        <div id="hncu_footer">
-            <div id="hncu_comment" class="clearfix">
-                <input type="text" name="comment_content" id="comment_input" value="请输入搜索关键字" />
+        <div id="kjf_bottom">
+            <!--<div id="kjf_comment" class="clearfix">
+                <input type="text" name="comment_content" id="comment_input" placeholder="请输入搜索关键字" />
                 <a href="#" id="comment_btn"></a>
-            </div>
+            </div>-->
+           
         </div>
         
-        <!--  -->
+<!-- *************************************************************************************** -->
         <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
         <script type="text/javascript">
 
@@ -65,7 +93,20 @@
             var a_idx = 0;
             jQuery(document).ready(function ($) {
                 $("body").click(function (e) {
-                    var a = new Array("子鼠", "丑牛", "寅虎", "卯兔", "辰龙", "巳蛇", "午马", "未羊", "申猴", "酉鸡", "戌狗", "亥猪");
+                	
+                	var a = new Array("♣",
+                					  "◔ ‸◔?~",
+                					  "ꐦ °᷄д°᷅",
+                					  "｡◕‿‿◕｡",
+                					  "๑•́ ∀ •̀๑",
+                					  "ヾ￣▽￣~",
+                					  "ʅ´◔౪◔ʃ",
+                					  "๑•́ ₃ •̀๑",
+                					  "❤",
+                					  "ლ╹◡╹ლ",
+                					  "๑•ᴗ•๑",
+                					  "｡◝‿◜｡");
+                	
                     var $i = $("<span/>").text(a[a_idx]);
                     a_idx = (a_idx + 1) % a.length;
                     var x = e.pageX,
@@ -76,7 +117,7 @@
                         "left": x,
                         "position": "absolute",
                         "font-weight": "bold",
-                        "color": "#ff6651"
+                        "color": "#f2c20a"
                     });
                     $("body").append($i);
                     $i.animate({
