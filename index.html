@@ -8,59 +8,75 @@
     </head>
 
     <body>
-    	<div id="kjf_nav" class="clearfix">
-	        <ul class="clearfix">
-	            <li>
-	                <a href="http://www.cnblogs.com/tianxiaxuange/" target="_blank">
-	                	我的博客
-	                	<p>My Blog</p>
-	                </a>
-	            </li>
-	            
-	            <li>
-	                <a href="#">
-	                	我的简历
-	                	<p>My Resume</p>
-	                </a>
-	            </li>
-	            
-	            <li>
-	                <a href="#">
-	                	我的项目
-	                	<p>My Project</p>
-	                </a>
-	            </li>
-	            
-	            <li>
-	                <a href="#">
-	                	我的相册
-	                	<p>My Album</p>
-	                </a>
-	            </li>
-	            
-	            <li>
-	                <a href="#">
-	                	联系我	
-	                	<p>Contact Me</p>
-	                </a>
-	            </li>
-	            
-	            <li>
-	                <a href="#">
-	                	关于我
-	                	<p>About Me</p>
-	                </a>
-	            </li>
-	        </ul>
-	        <img src="./img/cool.png">
-	        <div id="kjf_copyright">Copyright &copy; 2018 kjf</div>
+        <div id="kjf_nav" class="clearfix">
+            <ul class="clearfix">
+                <li>
+                    <a href="http://www.cnblogs.com/tianxiaxuange/" target="_blank">
+                        我的博客
+                        <p>My Blog</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#">
+                        我的简历
+                        <p>My Resume</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#">
+                        我的项目
+                        <p>My Project</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#">
+                        我的相册
+                        <p>My Album</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#">
+                        联系我	
+                        <p>Contact Me</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#">
+                        关于我
+                        <p>About Me</p>
+                    </a>
+                </li>
+            </ul>
+            <img src="./img/cool.png">
+            <div id="kjf_copyright">Copyright &copy; 2018 kjf</div>
         </div>
         
         <div id="kjf_right">
+            
             <!--<div id="kjf_search" class="clearfix">
-                <input type="text" name="searh_content" id="search_input" placeholder="请输入搜索关键字" />
+                <input type="text" name="se                                                     arh_content" id="search_input" placeholder="请输入搜索关键字" />
                 <a href="#" id="search_btn"></a>
             </div>-->
+            
+            <div id="uservisit">
+                <form action="./deal.html" method="post">
+                    <label for="user_nums">帐号:</label>
+                        <input type="text" id="user_nums"/><br /><br />
+                    <label for="user_password">密码:</label>
+                        <input type="password" id="user_password  "/><br /><br />
+                    
+                    <button type="reset">重置</button>
+                    <button type="submit">登录</button>
+                    <button type="button">注册</button><br /><br />
+                </form>
+                
+                
+            </div>
         </div>
         
         <div id="kjf_left" class="clearfix">
@@ -93,20 +109,20 @@
             var a_idx = 0;
             jQuery(document).ready(function ($) {
                 $("body").click(function (e) {
-                	
-                	var a = new Array("♣",
-                					  "◔ ‸◔?~",
-                					  "ꐦ °᷄д°᷅",
-                					  "｡◕‿‿◕｡",
-                					  "๑•́ ∀ •̀๑",
-                					  "ヾ￣▽￣~",
-                					  "ʅ´◔౪◔ʃ",
-                					  "๑•́ ₃ •̀๑",
-                					  "❤",
-                					  "ლ╹◡╹ლ",
-                					  "๑•ᴗ•๑",
-                					  "｡◝‿◜｡");
-                	
+                    
+                    var a = new Array("♣",
+                                      "◔ ‸◔?~",
+                                      "ꐦ °᷄д°᷅",
+                                      "｡◕‿‿◕｡",
+                                      "๑•́ ∀ •̀๑",
+                                      "ヾ￣▽￣~",
+                                      "ʅ´◔౪◔ʃ",
+                                      "๑•́ ₃ •̀๑",
+                                      "❤",
+                                      "ლ╹◡╹ლ",
+                                      "๑•ᴗ•๑",
+                                      "｡◝‿◜｡");
+                    
                     var $i = $("<span/>").text(a[a_idx]);
                     a_idx = (a_idx + 1) % a.length;
                     var x = e.pageX,
