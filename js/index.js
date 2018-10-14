@@ -13,6 +13,7 @@ window.onload = function(){
         followMouse.style.top = y + 7 + "px";
     });
     
+    //鼠标坐标信息
     var theBody = document.body;
     var moveInfo = document.getElementById("move_info");
     theBody.onmousemove = function(e){
