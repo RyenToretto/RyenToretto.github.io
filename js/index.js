@@ -12,4 +12,16 @@ window.onload = function(){
         followMouse.style.left = x + 7 + "px";
         followMouse.style.top = y + 7 + "px";
     });
+    
+    var theBody = document.body;
+    var moveInfo = document.getElementById("move_info");
+    theBody.onmousemove = function(e){
+        e = e || window.event;
+
+        var x = e.clientX + document.body.scrollLeft || document.documentElement.scrollLeft;
+        var y = e.clientY + document.body.scrollTop || document.documentElement.scrollTop;
+        moveInfo.innerHTML = "<span>client( "+e.clientX+" , "+e.clientY+" )</span>"+
+                             "body( "+x+" , "+y+" )";
+        moveInfo.getElementsByTagName("span")[0].style.marginRight = "20px";
+    };
 };
