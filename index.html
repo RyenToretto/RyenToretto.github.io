@@ -1,15 +1,119 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <title>Ryen Toretto's Home Page</title>
+        <meta charset="UTF-8" />
+        <title></title>
         
         <link rel="stylesheet" type="text/css" href="./css/index.css" />
+        <script type="text/javascript">
+            
+            // 自定义获取元素当前样式
+            function getCurrentStyle(obj, name){
+                if(window.getComputedStyle){
+                    // 大多浏览器支持, IE8 及以下不支持
+                    return window.getComputedStyle(obj, null)[name];
+                }else{
+                    // 只有 IE 浏览器支持
+                    return obj.currentStyle[name];
+                }
+            }
+            
+            // 自定义绑定响应函数
+            function bindEventFunc(obj, eventStr, func){
+                // console.log(!!obj.addEventListener == true);    // true
+                // console.log(!!obj.attachEvent == true );    // false
+                if(obj.addEventListener){
+                    // 大多数浏览器支持, IE8 及以下不支持
+                    obj.addEventListener(eventStr, func, false);
+                }else{
+                    // IE5 - IE10 支持
+                    obj.attachEvent("on"+eventStr, function(){
+                        func().call(obj);
+                    });
+                }
+            }
+            
+            // 自定义解除响应函数
+            function removeEventFunc(obj, eventStr, func){
+                // console.log(!!obj.removeEventListener == true);    // true
+                // console.log(!!obj.detachEvent == true );    // false
+                if(obj.removeEventListener){
+                    // 大多数浏览器支持, IE8 及以下不支持
+                    obj.removeEventListener(eventStr, func, false);
+                }else if(obj.detachEvent){
+                    // IE5 - IE10 支持
+                    obj.detachEvent("on"+eventStr, func);
+                }
+            }
+            
+            // 自定义 获取元素 在整个页面中的 坐标
+            function posInHTML(obj){
+                var rect = obj.getBoundingClientRect();
+                
+                // 在IE中，默认坐标从(2,2)开始计算，导致最终距离比其他浏览器多出两个像素，需要做以下兼容
+                var top = document.documentElement.clientTop;
+                var left = document.documentElement.clientLeft;
+                
+                return {
+                    top: rect.top - top,
+                    right: rect.right - left,
+                    bottom: rect.bottom - top,
+                    left: rect.left - left
+                };
+            }
+            
+            // 自定义 获取鼠标 在目标元素中的 坐标
+            function posInElement(obj,e){
+                var mouseX = e.clientX+(document.body.scrollLeft || document.documentElement.scrollLeft);
+                var mouseY = e.clientY+(document.body.scrollTop || document.documentElement.scrollTop);
+                
+                var objX = obj.getBoundingClientRect().left - document.documentElement.clientLeft;
+                var objY = obj.getBoundingClientRect().top - document.documentElement.clientTop;
+                
+                return {
+                    top: mouseY - objY,
+                    left: mouseX - objX,
+                    right: obj.style.width - mouseX - objX,
+                    bottom: obj.style.height - mouseY - objY
+                };
+            }
+            
+            window.onload = function(){
+                // 鼠标跟随
+                var followMouse = document.getElementById("follow_mouse");
+                bindEventFunc(document, "mousemove", function(e){
+                    e = e || window.event;
+                    
+                    // 鼠标相当于文档的 x , y 坐标
+                    var x = e.clientX + document.body.scrollLeft || document.documentElement.scrollLeft;
+                    var y = e.clientY + document.body.scrollTop || document.documentElement.scrollTop;
+                    
+                    followMouse.style.left = x + 7 + "px";
+                    followMouse.style.top = y + 7 + "px";
+                });
+                
+                // 右下角坐标信息
+                var theBody = document.body;
+                var moveInfo = document.getElementById("move_info");
+                theBody.onmousemove = function(e){
+                    e = e || window.event;
+                    
+                    var x = e.clientX + document.body.scrollLeft || document.documentElement.scrollLeft;
+                    var y = e.clientY + document.body.scrollTop || document.documentElement.scrollTop;
+                    moveInfo.innerHTML = "<span>client( "+e.clientX+" , "+e.clientY+" )</span>"+
+                                         "body( "+x+" , "+y+" )";
+                    moveInfo.getElementsByTagName("span")[0].style.marginRight = "20px";
+                }
+            };
+        </script>
     </head>
-
     <body>
-        <div id="kjf_nav" class="clearfix">
-            <ul class="clearfix">
+        <div id="follow_mouse" class="unSelectedAble">
+            <img src="./img/xiao.gif" />
+        </div>
+        
+        <div id="top_nav_box" class="clearfix unSelectedAble">
+            <ul id="top_nav" class="clearfix">
                 <li>
                     <a href="http://www.cnblogs.com/tianxiaxuange/" target="_blank">
                         我的博客
@@ -52,107 +156,72 @@
                     </a>
                 </li>
             </ul>
-            <img src="./img/cool.png">
-            <div id="kjf_copyright">Copyright &copy; 2018 kjf</div>
         </div>
         
-        <div id="kjf_right">
+        <div id="leftLu" class="clearfix unSelectedAble">
+            <img  id="lu" src="./img/cool.png" />
+        </div>
+        
+        <div id="kjf_top" class="clearfix">
+            <div id="top_left" class="">
+                <p>I don t know how to start,so i just close myself ...and go away .</p>
+                <p>May be all of this , just a joke the god made to me，what make me embarrassed , and embarrassed you .</p>
+                <p>Fortunately , the words is a poetic anyway.</p>
+                <p>你剥开一个很酸的橘子而感到后悔了，而对于橘子来说，这就是他的一切</p>
+                <p>我想不起来第一次看见你的时候，你穿的是什么衣服，是晴天还是雨天。因为我从未想过那天之后会喜欢你。</p>
+                <p>有人读《战争与和平》把它当成普通的冒险故事，有人看着口香糖包装纸上的成分说明，就解开了宇宙的奥秘</p>
+                <p>Oh,here will i set up my everlasting rest and shake the yoke of inauspicious satrs from this world-wearied flesh.</p>
+                <p>Eyes , look your last.</p>
+                <p>And lips,O you,the doors of breath,seal with a righteous kiss a dateless bargain to engrossing death.</p>
+                <p>柔者不坚，不坚者愁，愁者无志，无志者庸，庸岂帅焉?</p>
+                <p>于是，当有人轻喊你的名字，便足以解释了我的一生。</p>
+                <p>"为什么我们总爱上那些不在乎我们的人？"</p>
+                <p>"因为我们内心觉得自己不配拥有更好的。"</p>
+                <p>是非功过有青史，善恶斤两问阎王。</p>
+                <p>"蛙声小透绿窗纱，楼外大江浪淘沙"</p>
+                <p>Wel, that's the problem.Despite every nerve in my body wnting to break something.</p>
+                <p>本应咆哮世界做个怪物，偏要收敛爪牙做个废物。</p>
+                <p>每个人心里都住着魔鬼，幸福是它的牢笼，当一切幸福都化作泡影，魔鬼就会冲破牢笼高唱着血腥的圣歌浮现。那时候，绝望的人将所向无敌。</p>
+                <p>过去都是假的，回忆是一条没有归途的路，以往的一切都无法复原，即使是最狂热坚贞的爱情，归根结底也不过是一种瞬息即逝的现实。唯有孤独永恒</p>
+                <p>The pain may fade, but scar serves as a reminder of our suffering, and make the bearer all the more resolved, never to be wounded again. </p>
+            </div>
             
-            <!--<div id="kjf_search" class="clearfix">
-                <input type="text" name="se                                                     arh_content" id="search_input" placeholder="请输入搜索关键字" />
-                <a href="#" id="search_btn"></a>
-            </div>-->
+            <div id="top_right" class="">
+                <p>总是有人喜欢想象中的你，到后来唾弃你，说什么原来你是这样的人。</p>
+                <p>其实你从来都是这个样子，明明什么都没做，却落得声名狼藉</p>
+                <p>从我这厌恶人生的躯体上，挣脱厄运的奴役</p>
+                <p>我要在这儿永远安息</p>
+                <p>眼，最后再看你一次。</p>
+                <p>嘴，最后在你呼吸的双唇印下堂堂正正的一吻，与死神签下永世的契约</p>
+                <p>大秦王朝在鼎盛时，那位被誉为千古一帝的男人不顾非议，硬是将国都改名洛阳，后世都说有违天理，此举埋下了大秦三世而亡的伏笔。此后更是为了一个名字没有载入史册的狐媚女子，点燃了一千八百座烽燧狼烟，更是被视为昏聩至极，真不知道怎样倾国倾城的女子，才能让大秦皇帝如此行事。一个女子陪着他打下天下，另一个女子葬送了天下，如果有机会，定要当面问一问那个秦帝，新欢旧爱，到底更钟情哪个一些。</p>
+                <p>智不强者智不达，言不行者行不果。</p>
+                <p>有一美人兮，见之不忘。 </p>
+                <p>一日不见兮，思之如狂。 </p>
+                <p>凤飞翱翔兮，四海求凰。</p>
+                <p>无奈佳人兮，不在东墙。</p>
+                <p>将琴代语兮，聊写衷肠。</p>
+                <p>何日见许兮，慰我彷徨。</p>
+                <p>愿言配德兮，携手相将。</p>
+                <p>不得於飞兮，使我沦亡。</p>
+                <p>凤兮凤兮归故乡，遨游四海求其凰。</p>
+                <p>时未遇兮无所将，何悟今兮升斯堂！</p>
+                <p>有时候人只需要一只温暖的手的触摸,就像是拥有了整个世界。</p>
+                <p>在这个世界的某个角落必有为你而生的人，当你站在悬崖尽头时也不要失去希望，要多坚持那么一秒钟，等那个人一骑绝尘如狂风闪电般出现在你面前。你将跨上他的马背，即使他是被神囚禁了一千年的魔鬼。</p>
+            </div>
             
-            <div id="uservisit">
-                <form action="./deal.html" method="post">
-                    <label for="user_nums">帐号:</label>
-                        <input type="text" id="user_nums"/><br /><br />
-                    <label for="user_password">密码:</label>
-                        <input type="password" id="user_password  "/><br /><br />
-                    
-                    <button type="reset">重置</button>
-                    <button type="submit">登录</button>
-                    <button type="button">注册</button><br /><br />
-                </form>
-                
-                
+            <div id="kjf_clear" class=""></div>
+        </div>
+        
+        <div id="kjf_bottom" class="clearfix unSelectedAble">
+            <div id="bottomInfo" class="clearfix">
+                <div id="copyright">Copyright ©2018 RyenToretto KJF</div>
+                <div id="move_info"></div>
             </div>
         </div>
         
-        <div id="kjf_left" class="clearfix">
-        </div>
-        
-        <div id="kjf_bottom">
-            <!--<div id="kjf_comment" class="clearfix">
-                <input type="text" name="comment_content" id="comment_input" placeholder="请输入搜索关键字" />
-                <a href="#" id="comment_btn"></a>
-            </div>-->
-           
-        </div>
-        
-<!-- *************************************************************************************** -->
-        <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+        <!-- javascript 代码 -->
         <script type="text/javascript">
-
-            $(function () {
-                /* jquery给出了解决方案，js把代码放在$(function () {}中即可，*/
-                /* 意思是页面加载完后再执行js */
-                /* $()中传递字符串就是选择器，如果传递函数就是页面加载后，再执行的函数 */
-                
-                $('#content').html('new content 11')
-            })
-        </script>
-        
-        <!--  -->
-        <script type = "text/javascript">
-            /* 鼠标点击特效 */
-            var a_idx = 0;
-            jQuery(document).ready(function ($) {
-                $("body").click(function (e) {
-                    
-                    var a = new Array("♣",
-                                      "◔ ‸◔?~",
-                                      "ꐦ °᷄д°᷅",
-                                      "｡◕‿‿◕｡",
-                                      "๑•́ ∀ •̀๑",
-                                      "ヾ￣▽￣~",
-                                      "ʅ´◔౪◔ʃ",
-                                      "๑•́ ₃ •̀๑",
-                                      "❤",
-                                      "ლ╹◡╹ლ",
-                                      "๑•ᴗ•๑",
-                                      "｡◝‿◜｡");
-                    
-                    var $i = $("<span/>").text(a[a_idx]);
-                    a_idx = (a_idx + 1) % a.length;
-                    var x = e.pageX,
-                        y = e.pageY;
-                    $i.css({
-                        "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
-                        "top": y - 20,
-                        "left": x,
-                        "position": "absolute",
-                        "font-weight": "bold",
-                        "color": "#f2c20a"
-                    });
-                    $("body").append($i);
-                    $i.animate({
-                        "top": y - 180,
-                        "opacity": 0
-                    },
-                        1500, function () {
-                        $i.remove();
-                    });
-                });
-            });
-        </script>
-        
-        <!--  -->
-        <script src="js/activate-power-mode.js"></script>
-        <script>
-            POWERMODE.colorful = true; // 控制开启/开启礼花特效  
-            POWERMODE.shake = true; // 控制开启/关闭屏幕震动特效  
-            document.body.addEventListener('input', POWERMODE);
+            
         </script>
     </body>
 </html>
