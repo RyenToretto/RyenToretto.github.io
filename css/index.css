@@ -45,7 +45,7 @@ body {
     top: 0px;
     
     width: 100%;
-    height: 6%;
+    height: 58px;
     background: rgba(62,32,80,0.68);
 }
 
@@ -54,7 +54,7 @@ body {
     left: 0px;
     top: 0px;
     
-    width: 100%;
+    width: 1920px;
     height: 100%;
     list-style: none;
     float: left;
